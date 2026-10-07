@@ -36,6 +36,16 @@ Open [http://localhost:4173](http://localhost:4173). The backend serves the dash
 
 The default analyst sign in is a browser-only demo. It stores local account records and salted PBKDF2 password hashes in the current browser; it is not a production identity store.
 
+## Tech stack
+
+| Layer | Technologies |
+| --- | --- |
+| Frontend | HTML, CSS, vanilla JavaScript modules |
+| Backend | Node.js 20+ with built-in HTTP and filesystem modules |
+| Optional sign in | Microsoft MSAL Browser and Microsoft Entra ID |
+| Offline benchmark | Python and scikit-learn |
+| Input data | CSV and JSON authentication event files |
+
 ## Dashboard
 
 SprayScope analyzes uploaded CSV or JSON authentication events and the bundled simulated stream. It highlights:
