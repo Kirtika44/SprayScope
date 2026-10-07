@@ -1,0 +1,201 @@
+SPRAYSCOPE — PROJECT OVERVIEW
+============================
+
+Purpose of this document
+------------------------
+This document explains what the SprayScope website does, how its current
+prototype works, what problem it is intended to address, and how it could be
+developed further. It describes the implementation in this project folder.
+
+
+1. WHAT PROBLEM DOES SPRAYSCOPE ADDRESS?
+----------------------------------------
+Organizations produce many authentication records when people and services
+sign in. A security analyst may need to identify suspicious patterns hidden
+among normal sign-ins, such as repeated failed attempts against an account,
+one source attempting many accounts, or an account appearing to sign in from
+far-apart locations in a short time.
+
+SprayScope is a hackathon prototype for exploring authentication-event data
+and highlighting some of these patterns. It aims to make a detection easier
+to understand by showing the related events and the rule that caused an
+incident to appear.
+
+The current project is a demonstration and learning tool. It does not connect
+to a real VPN, monitor a real organization's sign-ins, block an attacker, or
+replace a production security information and event management (SIEM) system.
+
+
+2. HOW THE WEBSITE WORKS
+------------------------
+The project has a browser-based frontend and a small Node.js backend.
+
+Analyst website:
+1. The analyst opens the website and signs into the local prototype account.
+   The account data is stored in that browser. Microsoft sign-in requires an
+   Entra application/client ID to be configured; it is not configured by
+   default.
+2. The analyst loads a bundled sample or selects an authentication CSV/JSON
+   file. The selected file is read and processed in the browser.
+3. The website proposes which file columns correspond to fields such as
+   timestamp, username, source IP address, result, and country. The analyst
+   reviews the mapping.
+4. The browser normalizes the rows into a common event format and runs the
+   detection rules.
+5. The dashboard displays incidents, matching evidence, event timelines,
+   source/user relationships, and exports. When the input has labels, it can
+   also calculate event-level precision, recall, and confusion counts.
+
+The six current rule types are:
+- Brute force: repeated failed attempts against one username in a short window.
+- Password spray: one source fails against many different usernames.
+- Impossible travel: successful sign-ins appear far apart according to
+  supported country-centroid estimates and a short time gap.
+- Credential stuffing: repeated failures against several users from one source.
+- Abnormal burst: an unusually large volume of sign-in events in a short time.
+- Account enumeration: failure details indicate unknown usernames across
+  multiple accounts.
+
+These are deterministic JavaScript heuristics with fixed thresholds. The live
+dashboard does not use a trained machine-learning model. Risk and confidence
+values are rule-derived indicators; confidence is not a calibrated
+probability.
+
+Simulated user portal:
+The User VPN Portal can create fictional sign-in events, either one at a time
+or through scenario buttons. These events contain metadata such as username,
+source IP, outcome, and time; passwords are not saved or sent. The portal
+sends events to the local backend API. The analyst dashboard polls that API
+and can show the incoming events. This simulates a data flow for a demo; it
+does not validate a real user's password or connect to a VPN.
+
+The portal also has a comparison action that records two clearly fictional
+demo events: employee.success@cybernova.test is accepted and
+employee.failed@cybernova.test is rejected. It requires no password. The
+source address is read from the backend connection. When the browser and
+server both run on localhost, that address is loopback; it is not the user's
+public internet IP. A directly reached deployed server can observe the
+connecting client address, while a reverse proxy may cause the server to see
+the proxy address instead.
+
+Backend and storage:
+The Node.js server serves the website and provides API endpoints for checking
+service health and reading or recording simulated portal events. It stores
+portal events in a JSON file. Browser-side state and local prototype accounts
+use browser storage. There is no database server, API authentication,
+production access control, or built-in TLS configuration. Uploaded analyst
+datasets are processed in the browser and are not uploaded by this workflow.
+
+
+3. DATA AND RESULTS
+-------------------
+The repository includes small CSV samples for demonstrations. Three
+attack-specific fixtures are labeled synthetic examples; the mixed demo file
+is illustrative and unlabeled. Metrics from labeled fixtures measure how the
+rules behave on those particular constructed examples. They do not establish
+accuracy on real organizations or future attacks.
+
+An offline script for a logistic-regression experiment using LANL
+authentication data exists separately from the website. It is not connected
+to the live dashboard, and the local LANL archive was incomplete at the last
+project inspection. Therefore, the project should not claim that a trained
+ML model is currently detecting attacks in the website.
+
+
+4. WHY THIS APPROACH IS USEFUL FOR A HACKATHON
+---------------------------------------------
+The prototype combines data upload and field mapping, explainable detection
+rules, incident evidence, a simulated event portal, and labeled demo fixtures
+in one workflow. A presenter can demonstrate how events become alerts and
+explain the evidence behind a rule match without using real credentials or a
+real VPN.
+
+Its strongest current value is the transparent end-to-end demonstration. The
+individual attack patterns and threshold-based techniques are established
+ideas; the project does not claim to invent a new detection algorithm.
+
+
+5. CURRENT LIMITATIONS
+----------------------
+- The portal and bundled attack examples are simulated or synthetic.
+- Fixed thresholds may not fit every organization's normal sign-in behavior.
+- Impossible-travel detection uses coarse country centroids; VPN exits and
+  inaccurate location information can create false alerts or missed alerts.
+- Overlapping rules can create separate incidents for related activity.
+- Large uploads are held in browser memory; this is not designed for large
+  production log volumes.
+- Backend events are stored in a local JSON file, not a transactional database.
+- The backend has no authentication or authorization for API callers.
+- Local browser accounts are not a shared, production identity system.
+- Microsoft identity sign-in needs configuration before it can be used.
+- There is no real VPN, identity-provider, SIEM, or alert-delivery integration.
+- The optional LANL model experiment is incomplete and not deployed in the app.
+
+
+6. FUTURE SCOPE
+---------------
+The following work could move SprayScope toward a more useful security
+product. These are future possibilities, not features that should be claimed
+as already implemented.
+
+Data and integrations:
+- Add permissioned connectors for a real identity provider or VPN log source.
+- Ingest events through an authenticated API and document a stable event
+  schema.
+- Add reliable geolocation and identity context, while recording the source
+  and quality of that context.
+- Integrate with a SIEM or ticketing system only after secure authorization
+  and alert controls are in place.
+
+Detection and evaluation:
+- Test on complete, representative, permissioned, labeled datasets.
+- Split evaluation data by time and report class balance, label coverage,
+  precision, recall, false-positive rate, and incident-level results.
+- Tune thresholds with security analysts and measure how often alerts are
+  useful in their workflow.
+- Correlate overlapping incidents and support organization-specific rules.
+- Complete the offline LANL experiment reproducibly before considering any
+  model for integration; compare it fairly with the existing rules.
+- If using ML in the future, monitor drift and keep explanations and human
+  review for high-impact decisions.
+
+Backend and operations:
+- Replace the JSON file with a transactional database and define retention,
+  backups, and deletion policies.
+- Add server-side identity validation, role-based authorization, tenant
+  separation, secure sessions, rate limits, audit logs, and HTTPS deployment.
+- Add chunked upload processing, size limits, row validation, and clear
+  reports for rejected or incomplete records.
+- Add monitoring, error reporting, automated deployment, and load testing.
+- Keep the system as an alerting and investigation aid unless a carefully
+  tested response integration is explicitly designed and authorized.
+
+Product and user experience:
+- Interview analysts to confirm which workflows and alerts save time.
+- Add saved investigations, collaboration, case notes, and audit history.
+- Make synthetic, simulated, and real data clearly distinguishable in the
+  interface and reports.
+- Design accessibility, privacy controls, and organization-specific settings.
+
+
+7. SHORT PRESENTATION SUMMARY
+-----------------------------
+SprayScope is a browser-based prototype for investigating authentication
+events. It accepts CSV or JSON logs, maps their fields, and applies six
+explainable rules to identify patterns such as brute force, password spray,
+and impossible travel. Analysts can review the matching evidence and use a
+simulated portal to generate demo events. The current dashboard is
+rule-based; its bundled metrics come from synthetic fixtures, and its portal
+does not connect to a real VPN. Future work includes secure identity and VPN
+integrations, a production database and access controls, and evaluation on
+complete, representative real-world data.
+
+
+PROJECT FOLDER QUICK REFERENCE
+------------------------------
+frontend/  Website interface and browser-side event processing
+backend/   Local Node.js server and JSON storage for portal events
+dataset/   Demo CSV fixtures and optional offline ML experiment files
+README.md  Local run instructions and project notes
+PROJECT_VIVA_GUIDE.md  Detailed technical study and panel-preparation guide
+

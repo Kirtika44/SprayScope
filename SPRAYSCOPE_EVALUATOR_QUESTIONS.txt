@@ -1,0 +1,146 @@
+SPRAYSCOPE — POSSIBLE EVALUATOR QUESTIONS
+=========================================
+
+Use these questions to practice explaining the project. Evaluators may ask
+follow-up questions, so be ready to explain the evidence and limitations
+behind each answer.
+
+
+A. PROJECT AND PROBLEM
+----------------------
+1. What problem is SprayScope trying to solve?
+2. Who is the intended user of the website?
+3. What does the website do from the moment an analyst loads a dataset?
+4. What is the main differentiator of SprayScope?
+5. What part of the project did your team build yourselves?
+6. Why is this problem important to organizations?
+7. How is SprayScope different from a full SIEM product?
+8. What are the boundaries of the current project?
+
+B. WEBSITE DEMONSTRATION AND USER FLOW
+---------------------------------------
+9. Can you demonstrate the complete workflow from loading data to reviewing
+   an incident?
+10. Which file formats and event fields does the website support?
+11. What does column mapping do, and why is it needed?
+12. What happens if a required field is missing or a row is malformed?
+13. How does the User VPN Portal work?
+14. Does the portal validate a real user's password or connect to a real VPN?
+15. How do portal events reach the analyst dashboard?
+16. Which actions are real, and which are only local previews?
+17. What can an analyst export from the website?
+
+C. DETECTION RULES AND SECURITY KNOWLEDGE
+-----------------------------------------
+18. Which attack patterns can the current website detect?
+19. How does the brute-force rule decide to create an incident?
+20. How is a password spray different from brute force in your implementation?
+21. How does the impossible-travel rule work?
+22. What assumptions does impossible-travel detection make about country data?
+23. How do credential stuffing, abnormal bursts, and account enumeration get
+    detected?
+24. Can one event appear in more than one incident? Why?
+25. How did you choose the detection thresholds?
+26. What kinds of false positives can these rules produce?
+27. What kinds of attacks might the current rules miss?
+28. How do you explain an alert to an analyst?
+29. Is the displayed confidence score a probability?
+
+D. DATA, LABELS, AND METRICS
+----------------------------
+30. What datasets are included in the project?
+31. Are the bundled datasets real or synthetic?
+32. How were the synthetic attack examples created?
+33. What do the labels in the attack-specific fixtures mean?
+34. How do you calculate true positives, false positives, false negatives,
+    and true negatives?
+35. Are the metrics event-level, user-level, or incident-level?
+36. What is precision, and what does it tell you here?
+37. What is recall, and what does it tell you here?
+38. Why can precision and recall be less than 100 percent?
+39. Do the fixture results prove the website will work on real traffic?
+40. What happens when the dataset has no labels or only partial labels?
+41. Why is accuracy not necessarily the best single metric for security data?
+42. How would you design a fair test on real authentication data?
+
+E. MACHINE LEARNING AND TECHNICAL DESIGN
+----------------------------------------
+43. Does the live website use a machine-learning model?
+44. What is the offline LANL logistic-regression experiment?
+45. Has that model been trained successfully and connected to the dashboard?
+46. Why might you choose transparent rules before machine learning?
+47. What would be needed before you could trust a trained model in production?
+48. Where does dataset parsing happen: in the browser or on the server?
+49. What technologies and libraries are used in the frontend and backend?
+50. What are the backend API endpoints responsible for?
+51. Where is event data stored? Is there a database?
+52. What happens if the backend is unavailable?
+53. What are the main performance limits of the current design?
+
+F. AUTHENTICATION, PRIVACY, AND SECURITY
+----------------------------------------
+54. How does the current analyst sign-in work?
+55. Is the local account system suitable for production use?
+56. Is Microsoft sign-in configured and working by default?
+57. Does the portal store or send the password entered into its form?
+58. Is the backend API authenticated and authorized?
+59. What would be the risks of exposing the current server to the public
+    internet?
+60. How would you protect real user and authentication data?
+61. What security controls would you add before a real deployment?
+62. How would you handle data retention and deletion?
+
+G. DEPLOYMENT, SCALABILITY, AND PRODUCT
+---------------------------------------
+63. How do you run the website locally?
+64. Is the project currently deployed to a production cloud service?
+65. What would need to change to support multiple organizations or tenants?
+66. Why would you replace JSON-file storage with a database?
+67. How would the system handle a large volume of authentication events?
+68. What real integrations would be most valuable to build first?
+69. How would you measure whether the product saves analysts time?
+70. Who might use or pay for a production version, and how would you validate
+    that need?
+
+H. TEAM, DEMO, AND REFLECTION
+-----------------------------
+71. How did your five-person team divide the work?
+72. What was the hardest technical challenge?
+73. What did you learn while building the project?
+74. What would you change if you started again?
+75. What is the next feature you would prioritize, and why?
+76. What is the biggest limitation you would disclose to a user?
+77. If the demo fails, how will you explain or demonstrate the workflow?
+78. How did you use coding assistance or AI, and how did the team verify its
+    output?
+79. What part of the implementation are you most prepared to explain in
+    detail?
+80. What is one claim about the project that you would avoid making?
+
+
+HIGH-PRIORITY QUESTIONS TO PRACTICE FIRST
+-----------------------------------------
+1. What problem does SprayScope address?
+2. What does the working prototype actually do?
+3. What is unique about your website?
+4. Which detection rules are implemented, and how do they work?
+5. Is the live website rule-based or machine-learning based?
+6. Are your datasets and results real or synthetic?
+7. How do precision and recall get calculated?
+8. What are the current security and deployment limitations?
+9. What would you build next to make this production-ready?
+10. What did each team member contribute?
+
+
+REMINDERS FOR ANSWERING
+-----------------------
+- Describe implemented features separately from future plans.
+- Call the portal simulated and the bundled attack fixtures synthetic.
+- State that live detections use rules; the offline ML experiment is separate
+  and incomplete.
+- Explain what the metrics measure and which data produced them.
+- Be open about limitations, then explain a practical next step.
+- Prepare the real work split and individual contributions with your team;
+  do not guess or invent them.
+
+

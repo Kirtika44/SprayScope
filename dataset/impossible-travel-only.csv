@@ -1,0 +1,15 @@
+timestamp,username,source_ip,result,country,user_agent,device,label
+2026-10-06T09:20:00Z,executive@demo.test,198.51.100.50,success,US,VPN Client,Executive Laptop,impossible_travel
+2026-10-06T09:21:00Z,executive@demo.test,203.0.113.50,success,GB,VPN Client,Executive Laptop,impossible_travel
+2026-10-06T09:32:00Z,manager@demo.test,198.51.100.51,success,US,VPN Client,Workstation,impossible_travel
+2026-10-06T09:33:00Z,manager@demo.test,203.0.113.51,success,GB,VPN Client,Workstation,impossible_travel
+2026-10-06T09:34:00Z,engineer@demo.test,198.51.100.52,success,US,VPN Client,Workstation,impossible_travel
+2026-10-06T09:35:00Z,engineer@demo.test,203.0.113.52,success,GB,VPN Client,Workstation,impossible_travel
+2026-10-06T09:22:00Z,analyst1@demo.test,198.51.100.10,success,US,VPN Client,Workstation,normal
+2026-10-06T09:24:00Z,analyst2@demo.test,198.51.100.11,success,US,VPN Client,Workstation,normal
+2026-10-06T09:26:00Z,analyst3@demo.test,198.51.100.12,success,US,VPN Client,Workstation,normal
+2026-10-06T09:30:00Z,vpn-user@demo.test,192.0.2.60,success,US,VPN Client,Phone,normal
+2026-10-06T09:31:00Z,vpn-user@demo.test,192.0.2.61,success,GB,VPN Client,Phone,normal
+2026-10-06T09:40:00Z,traveler2@demo.test,192.0.2.70,success,US,VPN Client,Unknown,impossible_travel
+2026-10-06T19:40:00Z,traveler2@demo.test,192.0.2.71,success,GB,VPN Client,Unknown,impossible_travel
+

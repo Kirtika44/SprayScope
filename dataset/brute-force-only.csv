@@ -1,0 +1,19 @@
+timestamp,username,source_ip,result,country,user_agent,device,label
+2026-10-06T09:00:00Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:00:15Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:00:30Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:00:45Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:01:00Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:01:15Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:01:30Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:01:45Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:02:00Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:02:15Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,brute_force
+2026-10-06T09:01:10Z,victim@demo.test,203.0.113.41,failure,US,VPN Client,Unknown,normal
+2026-10-06T09:03:00Z,analyst1@demo.test,198.51.100.10,success,US,VPN Client,Workstation,normal
+2026-10-06T09:04:00Z,analyst2@demo.test,198.51.100.11,success,US,VPN Client,Workstation,normal
+2026-10-06T09:05:00Z,analyst3@demo.test,198.51.100.12,failure,US,VPN Client,Workstation,normal
+2026-10-06T09:06:00Z,analyst4@demo.test,198.51.100.13,success,US,VPN Client,Workstation,normal
+2026-10-06T09:07:00Z,analyst5@demo.test,198.51.100.14,success,US,VPN Client,Workstation,normal
+2026-10-06T09:03:00Z,slow-attack@demo.test,192.0.2.78,failure,US,VPN Client,Unknown,brute_force
+

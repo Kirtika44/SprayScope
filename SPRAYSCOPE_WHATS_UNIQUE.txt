@@ -1,0 +1,109 @@
+SPRAYSCOPE — WHAT IS UNIQUE ABOUT THE WEBSITE?
+==============================================
+
+Purpose
+-------
+This note explains SprayScope's strongest differentiators for a hackathon
+presentation. “Unique” here means the way this prototype brings features
+together and demonstrates them. It does not mean that the underlying attack
+patterns or detection algorithms are new inventions.
+
+
+THE MAIN DIFFERENTIATOR
+-----------------------
+SprayScope brings an authentication-log workflow into one approachable demo:
+
+1. Load a sample or upload CSV/JSON authentication events.
+2. Map the input columns to a common event format.
+3. Run transparent rules for suspicious sign-in patterns.
+4. Inspect the incident evidence, timeline, and related users or source IPs.
+5. Generate simulated sign-in activity through a user portal and see those
+   events appear in the analyst workflow.
+6. Evaluate detections on labeled synthetic examples and export findings.
+
+The value is this connected, explainable demonstration rather than a claim
+that SprayScope has invented brute-force detection or a new AI model.
+
+
+WHAT STANDS OUT
+---------------
+
+1. Explainable alerts
+The rules expose the reason an event group was flagged, such as repeated
+failures for one user or one source trying many accounts. This helps a
+presenter or analyst inspect evidence instead of seeing only an unexplained
+score. Scores are rule-derived; they are not calibrated probabilities.
+
+2. A demo event generator and analyst view in one project
+The simulated User VPN Portal can create fictional login events. The backend
+shares those events with the analyst dashboard, where the same detection
+rules can analyze them. This makes the data flow easier to demonstrate at a
+hackathon without connecting a real VPN or collecting real passwords.
+
+3. Upload, mapping, detection, and investigation in one flow
+The analyst can work with supported CSV/JSON data, map its fields, run the
+rules, inspect the matching records, and export results. This makes the
+prototype useful for explaining the journey from raw events to an
+investigable alert.
+
+4. Several common sign-in abuse patterns
+The current website includes rules for brute force, password spray,
+impossible travel, credential stuffing, abnormal bursts, and account
+enumeration. The rules are separate and readable, making it easier to show
+how each detection works and where it may fail.
+
+5. Repeatable example datasets
+The repository contains small synthetic fixtures, including separate
+attack-specific examples with labels. These let the team repeat the same
+demonstration and calculate event-level metrics on known example data. They
+are not proof of real-world performance.
+
+6. Honest separation between the live rules and the ML experiment
+The website's current detector is rule-based. A separate offline
+logistic-regression training script exists for a LANL experiment, but that
+experiment is incomplete and is not integrated into the website. Explaining
+this clearly is a strength: the team can distinguish implemented behavior
+from research or future work.
+
+
+WHY THIS CAN HELP USERS
+-----------------------
+For students, evaluators, or a team learning about authentication security,
+SprayScope offers a visual way to see how a pattern in login records can
+become an alert and how the evidence can be reviewed. The simulated portal
+also provides a safe way to generate demo events. A real security team would
+need integrations, controls, and validation before relying on it.
+
+
+WHAT NOT TO CLAIM
+-----------------
+- Do not say the website uses AI/ML for live detections. It currently uses
+  deterministic JavaScript rules.
+- Do not claim a novel detection algorithm; the patterns are established
+  security concepts.
+- Do not call synthetic fixture scores real-world accuracy.
+- Do not say the portal logs into a real VPN or validates real credentials.
+- Do not say Microsoft sign-in is ready by default; it needs Entra
+  configuration.
+- Do not say alerts are sent to Microsoft Sentinel or another service; the
+  current query/alert actions are local previews.
+- Do not describe the current backend as production-secure or scalable.
+
+
+SHORT ANSWER FOR THE PANEL
+--------------------------
+“SprayScope's main differentiator is its explainable end-to-end demo. It
+combines authentication-log upload and field mapping, six readable
+rule-based detections, incident evidence, labeled synthetic examples, and a
+simulated sign-in portal whose events can appear in the analyst dashboard.
+The patterns themselves are established techniques, and the live website is
+not using a trained ML model. Our focus is making the detection and
+investigation workflow easy to demonstrate and understand.”
+
+
+ONE-SENTENCE ANSWER
+-------------------
+“SprayScope connects simulated or uploaded authentication events to
+explainable detection and incident investigation in one hackathon prototype.”
+
+
